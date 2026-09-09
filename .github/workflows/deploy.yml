@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 서버에 SSH 접속하여 배포
+        uses: appleboy/ssh-action@v1.2.2
+        env:
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_YML }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          envs: APPLICATION_PROPERTIES
+          script_stop: true
+          script: |
+            cd /home/ubuntu/fitlog_springserver_cicd
+            rm -rf src/main/resources/application.yaml
+            git pull origin main
+            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yaml
+            docker stop fitlog_springserver_cicd || true
+            docker rm fitlog_springserver_cicd || true
+            sudo fuser -k -n tcp 8070 || true
+            docker build --no-cache -t fitlog_springserver_cicd .
+            docker run -d --name fitlog_springserver_cicd -p 8070:8070 fitlog_springserver_cicd
