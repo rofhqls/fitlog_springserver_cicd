@@ -30,4 +30,5 @@ jobs:
             docker rm fitlog_springserver_cicd || true
             sudo fuser -k -n tcp 8070 || true
             docker build --no-cache -t fitlog_springserver_cicd .
-            docker run -d --name fitlog_springserver_cicd -p 8070:8070 fitlog_springserver_cicd
+            docker run -d --name fitlog_springserver_cicd -p 8070:8070 -e FILE_UPLOAD_PATH=/app/src/main/webapp/image -v /home/ubuntu/fitlog_cicd_sp/src/main/webapp/image:/app/src/main/webapp/image fitlog_springserver_cicd
+            
