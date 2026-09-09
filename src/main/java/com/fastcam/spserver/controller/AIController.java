@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/ai")
-@CrossOrigin({"http://localhost:8000", "http://localhost:3000"})
+@CrossOrigin({"http://172.31.34.207:8000", "http://172.31.47.115:3000", "http://172.31.47.115"})
 public class AIController {
 
     @Autowired

@@ -28,7 +28,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/member")
-@CrossOrigin({ "http://localhost:8000", "http://localhost:3000" })
+@CrossOrigin({ "http://172.31.34.207:8000", "http://172.31.47.115:3000", "http://172.31.47.115" })
 public class MemberController {
 
     @Autowired
@@ -200,12 +200,12 @@ public class MemberController {
             ms.insertMember(mdto);
             mdto = ms.getMemberById(kakaoProfile.getId());
             ms.insertMemberRole(mdto);
-            response.sendRedirect("http://13.125.244.199/savekakaoinfo/" + mdto.getNum());
+            response.sendRedirect("http://172.31.47.115/savekakaoinfo/" + mdto.getNum());
 
         } else {
             // 기존 회원 → 바로 로그인 처리 페이지
             response.sendRedirect(
-                    "http://13.125.244.199/kakaologin/" + mdto.getNum());
+                    "http://172.31.47.115/kakaologin/" + mdto.getNum());
         }
     }
 
