@@ -19,6 +19,7 @@ public class CommunityController {
     @Autowired
     CommunityService cs;
 
+
     @PostMapping("/writePost")
     public HashMap<String, Object> writePost(@RequestBody Community community) {
         HashMap<String, Object> map = new HashMap<>();
