@@ -19,6 +19,7 @@ public class AIController {
     @Autowired
     AIService as;
 
+
     @PostMapping("/query")
     public ResponseEntity<ResponseDto> query(@RequestBody RequestDto req) {
         ResponseDto res = as.query(req);
