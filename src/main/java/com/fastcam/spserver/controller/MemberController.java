@@ -28,7 +28,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/member")
-@CrossOrigin({"http://3.39.239.23:8000", "http://54.180.95.196:3000", "http://54.180.95.196"})
+@CrossOrigin({"http://3.37.55.238:8000", "http://54.180.95.196:3000", "http://54.180.95.196"})
 public class MemberController {
 
     @Autowired
